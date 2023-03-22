@@ -1,19 +1,34 @@
 import streamlit as st
 import psycopg2
+from dotenv import load_dotenv
+import os
 
-#CONECTOR COM BANCO
+# Carregar as variáveis de ambiente do arquivo .env
+load_dotenv('PROJETO-STREAMLIT/banco.env')
+
+# Obter os valores das variáveis de ambiente
+DB_HOST = os.getenv("DB_HOST")
+DB_DATABASE = os.getenv("DB_DATABASE")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+
+# Usar as variáveis de ambiente para conectar ao banco de dados
 conn = psycopg2.connect(
-    host= st.secrets['host'],
-    database= st.secrets['database'],
-    user= st.secrets['user'],
-    password=st.secrets['senha']
+    host=DB_HOST,
+    port=5432,
+    database=DB_DATABASE,
+    user=DB_USER,
+    password=DB_PASSWORD
 )
-#st.title("USUÁRIOS")
 
 #CONSULTA NO BANCO
 cur = conn.cursor()
-cur.execute("SELECT * FROM public.usuarios")
+cur.execute("SELECT nome, no_funcao FROM public.usuarios")
 rows = cur.fetchall()
-for row in rows:
-    print(row)
+# Mostrar o resultado da consulta em uma tabela
+st.tabs(rows)
+
+# Fechar a conexão e o cursor
+cur.close()
+conn.close()
     
