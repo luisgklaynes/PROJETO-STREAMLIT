@@ -1,3 +1,4 @@
+import streamlit as st
 import psycopg2
 
 conn = psycopg2.connect(
@@ -14,4 +15,5 @@ cur.execute("SELECT * FROM public.usuarios")
 rows = cur.fetchall()
 
 for row in rows:
-    print(row)
+    st.write(row)
+    
