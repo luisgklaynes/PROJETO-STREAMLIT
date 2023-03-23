@@ -24,14 +24,17 @@ conn = psycopg2.connect(
 
 #CONSULTA NO BANCO
 cur = conn.cursor()
-cur.execute("SELECT nome, no_funcao FROM public.usuarios")
+cur.execute("SELECT DISTINCT nome, no_funcao FROM public.usuarios")
 rows = cur.fetchall()
+#rows= rows[0]
+print(rows)
 
 # Mostrar o resultado da consulta em uma tabela
-df = pd.DataFrame(rows, columns=[desc[0] for desc in cur.description])
-print(df)
+#df = pd.DataFrame(rows, columns=[desc[0] for desc in cur.description])
 
-# Fechar a conexão e o cursor
-cur.close()
-conn.close()
+#print(df)
+
+# # Fechar a conexão e o cursor
+# cur.close()
+# conn.close()
     
