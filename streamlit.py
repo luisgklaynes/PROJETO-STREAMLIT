@@ -2,6 +2,7 @@ import streamlit as st
 import psycopg2
 from dotenv import load_dotenv
 import os
+import pandas as pd
 
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv('PROJETO-STREAMLIT/banco.env')
@@ -25,8 +26,10 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 cur.execute("SELECT nome, no_funcao FROM public.usuarios")
 rows = cur.fetchall()
+
 # Mostrar o resultado da consulta em uma tabela
-st.tabs(rows)
+df = pd.DataFrame(rows, columns=[desc[0] for desc in cur.description])
+print(df)
 
 # Fechar a conexão e o cursor
 cur.close()
