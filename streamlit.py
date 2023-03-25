@@ -26,7 +26,7 @@ def BancoPostgres():
 conn = BancoPostgres()
 #CONSULTA NO BANCO
 cur = conn.cursor()
-cur.execute("SELECT DISTINCT nome, no_funcao FROM public.usuarios")
+cur.execute("select * from erp_sistema.clientes")
 rows = cur.fetchall()
 
 # Mostrar o resultado da consulta em uma tabela
