@@ -6,7 +6,7 @@ import pandas as pd
 
 def BancoPostgres():
     # Carregar as variáveis de ambiente do arquivo .env
-    load_dotenv('PROJETO-STREAMLIT/banco.env')
+    load_dotenv('E:\PROJETO STREAMLIT\PROJETO-STREAMLIT/banco.env')
 
     # Obter os valores das variáveis de ambiente
     DB_HOST = os.getenv("DB_HOST")
@@ -17,7 +17,6 @@ def BancoPostgres():
     # Usar as variáveis de ambiente para conectar ao banco de dados
     conn = psycopg2.connect(
     host=DB_HOST,
-    port=5432,
     database=DB_DATABASE,
     user=DB_USER,
     password=DB_PASSWORD)
@@ -26,7 +25,7 @@ def BancoPostgres():
 conn = BancoPostgres()
 #CONSULTA NO BANCO
 cur = conn.cursor()
-cur.execute("SELECT DISTINCT nome, no_funcao FROM public.usuarios")
+cur.execute("select * from erp_sistema.clientes")
 rows = cur.fetchall()
 
 # Mostrar o resultado da consulta em uma tabela
