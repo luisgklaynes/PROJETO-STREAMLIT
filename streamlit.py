@@ -6,7 +6,7 @@ import pandas as pd
 
 def BancoPostgres():
     # Carregar as variáveis de ambiente do arquivo .env
-    load_dotenv('PROJETO-STREAMLIT/banco.env')
+    load_dotenv('PROJETO-STREAMLIT/bancoemp.env')
 
     # Obter os valores das variáveis de ambiente
     DB_HOST = os.getenv("DB_HOST")
